@@ -1,0 +1,30 @@
+{
+  "name": "employeedb",
+  "version": "1.0.0",
+  "description": "A content management system to manage a database of departments, roles, and employees for a company",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PierTwo/EmployeeDB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PierTwo/EmployeeDB/issues"
+  },
+  "homepage": "https://github.com/PierTwo/EmployeeDB#readme",
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "dotenv": "^16.0.2",
+    "inquirer": "^8.2.4",
+    "mysql2": "^2.3.3"
+  }
+}
