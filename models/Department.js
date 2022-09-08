@@ -28,7 +28,7 @@ class Department extends BaseEntity {
   }
 
   utilizedBudgets() {
-    const query = `SELECT d.id as department_id, d.department_name, SUM(r.salary) AS utilized_budget, COUNT(e.id) AS number_of_employees 
+    const query = `SELECT d.id, d.department_name, SUM(r.salary) AS utilized_budget, COUNT(e.id) AS number_of_employees 
     FROM departments AS d
     INNER JOIN roles AS r
     ON d.id = r.department_id
@@ -40,7 +40,7 @@ class Department extends BaseEntity {
   }
 
   utilizedBudgetById(id) {
-    const query = `SELECT d.id as department_id, d.department_name, SUM(r.salary) AS utilized_budget, COUNT(e.id) AS number_of_employees 
+    const query = `SELECT d.id, d.department_name, SUM(r.salary) AS utilized_budget, COUNT(e.id) AS number_of_employees 
     FROM departments AS d
     INNER JOIN roles AS r
     ON d.id = r.department_id
