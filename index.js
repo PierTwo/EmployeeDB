@@ -1,7 +1,7 @@
 require("dotenv").config();
 const chalk = require("chalk");
 const connect = require("./config/dbConfig");
-const menuPrompt = require("./src/mainMenu");
+const menuPrompt = require("./src/questions");
 
 async function main() {
   console.info(chalk.green("=".repeat(25)));
