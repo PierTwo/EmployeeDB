@@ -10,9 +10,11 @@ async function connect() {
       password: DB_PASSWORD,
       database: DB_NAME,
     });
+
+    return connection;
   } catch (err) {
     console.error(chalk.red(err));
-    throw new Error("Unable to connect to database");
+    throw new Error(chalk.red("Unable to connect to database"));
   }
 }
 
