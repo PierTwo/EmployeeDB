@@ -69,7 +69,7 @@ async function initAdd(choice, dbConnection) {
 
           employees.insert(employee);
 
-          return console.info(chalk.green(`Added employee with ${JSON.stringify(employee)}`));
+          return console.table(chalk.green("=".repeat(6), "Added employee", "=".repeat(6)));
         }
       });
   }
@@ -94,25 +94,25 @@ async function initAdd(choice, dbConnection) {
         },
       ])
       .then(async (response) => {
-        if (isNaN(parseInt(response.roleSalary))) {
+        if (isNaN(parseInt(response.salary))) {
           console.info(chalk.red("Please enter a number for the role salary"));
 
           return addRole();
-        } else if (isNaN(parseInt(response.roleDeptId))) {
+        } else if (isNaN(parseInt(response.deptId))) {
           console.info(chalk.red("Please enter a number for the department id"));
 
           return addRole();
-        } else {
-          const role = {
-            title: response.title,
-            salary: response.salary,
-            department_id: response.deptId,
-          };
-
-          roles.insert(role);
-
-          return console.info(chalk.green(`Added role with ${JSON.stringify(role)}`));
         }
+
+        const role = {
+          title: response.title,
+          salary: response.salary,
+          department_id: response.deptId,
+        };
+
+        roles.insert(role);
+
+        return console.table(chalk.green("=".repeat(6), "Added role", "=".repeat(6)));
       });
   }
 
@@ -130,7 +130,7 @@ async function initAdd(choice, dbConnection) {
 
         depts.insert(dept);
 
-        return console.info(chalk.green(`Added department ${response.deptName}`));
+        return console.table(chalk.green("=".repeat(6), "Added department", "=".repeat(6)));
       });
   }
 }

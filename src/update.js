@@ -113,11 +113,7 @@ async function initUpdate(choice, dbConnection) {
 
         employees.updateById(updatedEmployee, response.employeeId);
 
-        return console.info(
-          chalk.green(
-            `Updated employee ${response.employeeId} with ${JSON.stringify(updatedEmployee)}`
-          )
-        );
+        return console.table(chalk.yellow("=".repeat(6), "Updated employee", "=".repeat(6)));
       });
   }
 
@@ -148,9 +144,7 @@ async function initUpdate(choice, dbConnection) {
 
         employees.updateManager(response.managerId, response.id);
 
-        return console.info(
-          chalk.green(`Updated manager for employee ${response.id} to ${response.managerId}`)
-        );
+        return console.table(chalk.yellow("=".repeat(6), "Updated manager", "=".repeat(6)));
       });
   }
 
@@ -226,9 +220,7 @@ async function initUpdate(choice, dbConnection) {
 
         roles.updateById(updatedRole, response.roleId);
 
-        return console.info(
-          chalk.green(`Updated role ${response.roleId} with ${JSON.stringify(updatedRole)}`)
-        );
+        return console.table(chalk.yellow("=".repeat(6), "Updated role", "=".repeat(6)));
       });
   }
 
@@ -258,9 +250,7 @@ async function initUpdate(choice, dbConnection) {
 
         depts.updateById(dept, response.deptId);
 
-        return console.info(
-          chalk.green(`Updated department ${response.deptId} with ${dept.department_name}`)
-        );
+        return console.table(chalk.yellow("=".repeat(6), "Updated department", "=".repeat(6)));
       });
   }
 }

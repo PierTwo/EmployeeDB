@@ -40,7 +40,7 @@ async function initDelete(choice, dbConnection) {
 
         employees.deleteById(response.id);
 
-        return console.info(chalk.green(`Deleted the employee with an id of ${response.id}`));
+        return console.table(chalk.red("=".repeat(6), "Deleted employee", "=".repeat(6)));
       });
   }
 
@@ -60,7 +60,7 @@ async function initDelete(choice, dbConnection) {
 
         roles.deleteById(response.id);
 
-        return console.info(chalk.green(`Deleted the role with an id of ${response.id}`));
+        return console.table(chalk.red("=".repeat(6), "Deleted role", "=".repeat(6)));
       });
   }
 
@@ -80,7 +80,7 @@ async function initDelete(choice, dbConnection) {
 
         depts.deleteById(response.id);
 
-        return console.info(chalk.green(`Deleted the department with an id of ${response.id}`));
+        return console.table(chalk.red("=".repeat(6), "Deleted department", "=".repeat(6)));
       });
   }
 }

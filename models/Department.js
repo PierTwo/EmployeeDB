@@ -8,9 +8,9 @@ class Department extends BaseEntity {
   findAll() {
     const query = `SELECT d.*, COUNT(e.id) AS number_of_employees 
     FROM departments AS d
-    INNER JOIN roles AS r
+    LEFT JOIN roles AS r
     ON d.id = r.department_id
-    INNER JOIN employees AS e
+    LEFT JOIN employees AS e
     ON r.id = e.role_id
     GROUP BY d.id`;
     return super.findAll(query);
