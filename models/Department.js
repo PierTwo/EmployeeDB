@@ -17,7 +17,13 @@ class Department extends BaseEntity {
   }
 
   findById(id) {
-    const query = `SELECT * FROM departments WHERE id = ?`;
+    const query = `SELECT d.*, COUNT(e.id) AS number_of_employees 
+    FROM departments AS d
+    LEFT JOIN roles AS r
+    ON d.id = r.department_id
+    LEFT JOIN employees AS e
+    ON r.id = e.role_id
+    WHERE d.id = ?`;
     return super.findById(query, id);
   }
 
