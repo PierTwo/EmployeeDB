@@ -6,7 +6,13 @@ class Department extends BaseEntity {
   }
 
   findAll() {
-    const query = `SELECT * FROM departments`;
+    const query = `SELECT d.*, COUNT(e.id) AS number_of_employees 
+    FROM departments AS d
+    INNER JOIN roles AS r
+    ON d.id = r.department_id
+    INNER JOIN employees AS e
+    ON r.id = e.role_id
+    GROUP BY d.id`;
     return super.findAll(query);
   }
 
@@ -28,7 +34,7 @@ class Department extends BaseEntity {
   }
 
   utilizedBudgets() {
-    const query = `SELECT d.id, d.department_name, SUM(r.salary) AS utilized_budget, COUNT(e.id) AS number_of_employees 
+    const query = `SELECT d.*, SUM(r.salary) AS utilized_budget, COUNT(e.id) AS number_of_employees 
     FROM departments AS d
     INNER JOIN roles AS r
     ON d.id = r.department_id
