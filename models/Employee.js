@@ -73,6 +73,14 @@ class Employee extends BaseEntity {
     return super.updateById("employees", obj, id);
   }
 
+  updateManager(managerId, id) {
+    const query = `UPDATE employees
+    SET manager_id = ?
+    WHERE id = ?`;
+
+    return this.dbConnection.query(query, [managerId, id]);
+  }
+
   deleteById(id) {
     return super.deleteById("employees", id);
   }
