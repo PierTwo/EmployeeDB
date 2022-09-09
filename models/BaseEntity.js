@@ -1,5 +1,3 @@
-const chalk = require("chalk");
-
 class BaseEntity {
   constructor(dbConnection) {
     this.dbConnection = dbConnection;
@@ -22,11 +20,7 @@ class BaseEntity {
   }
 
   updateById(table, obj, id) {
-    return this.dbConnection.query(`UPDATE ?? SET ? WHERE id = ?`, [
-      table,
-      obj,
-      id,
-    ]);
+    return this.dbConnection.query(`UPDATE ?? SET ? WHERE id = ?`, [table, obj, id]);
   }
 
   deleteById(table, id) {
