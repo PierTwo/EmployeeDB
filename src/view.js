@@ -23,11 +23,11 @@ async function initView(choice, dbConnection) {
     case "View All Utilized Department Budgets":
       return allUtilizedBudgets();
 
-    case "View Employees By Department":
-      return employeesByDept();
-
     case "View Employees By Manager":
       return employeesByManager();
+
+    case "View Employees By Department":
+      return employeesByDept();
 
     case "Find Employee By ID":
       return employeeById();
@@ -45,73 +45,41 @@ async function initView(choice, dbConnection) {
       break;
   }
 
-  async function allDepts() {
-    const viewAllDepts = await depts.findAll();
-    return console.table(viewAllDepts[0]);
-  }
-
-  async function allRoles() {
-    const viewAllRoles = await roles.findAll();
-
-    return console.table(viewAllRoles[0]);
-  }
-
   async function allEmployees() {
     const viewAllEmployees = await employees.findAll();
     return console.table(viewAllEmployees[0]);
   }
 
-  async function deptById() {
-    await inquirer
-      .prompt({
-        type: "input",
-        message: "Enter the department id:",
-        name: "deptId",
-      })
-      .then(async (response) => {
-        if (isNaN(parseInt(response.deptId))) {
-          console.info(chalk.red("Please enter a number"));
-          return deptById();
-        }
-        const id = response.deptId;
-        const deptById = await depts.findById(id);
-        return console.table(deptById[0]);
-      });
+  async function allRoles() {
+    const viewAllRoles = await roles.findAll();
+    return console.table(viewAllRoles[0]);
   }
 
-  async function roleById() {
-    await inquirer
-      .prompt({
-        type: "input",
-        message: "Enter the role id:",
-        name: "roleId",
-      })
-      .then(async (response) => {
-        if (isNaN(parseInt(response.roleId))) {
-          console.info(chalk.red("Please enter a number"));
-          return roleById();
-        }
-        const id = response.roleId;
-        const roleById = await roles.findById(id);
-        return console.table(roleById[0]);
-      });
+  async function allDepts() {
+    const viewAllDepts = await depts.findAll();
+    return console.table(viewAllDepts[0]);
   }
 
-  async function employeeById() {
+  async function allUtilizedBudgets() {
+    const viewBudgets = await depts.utilizedBudgets();
+    return console.table(viewBudgets[0]);
+  }
+
+  async function employeesByManager() {
     await inquirer
       .prompt({
         type: "input",
-        message: "Enter the employee id:",
-        name: "employeeId",
+        message: "Enter the manager id:",
+        name: "managerId",
       })
       .then(async (response) => {
-        if (isNaN(parseInt(response.employeeId))) {
+        if (isNaN(parseInt(response.managerId))) {
           console.info(chalk.red("Please enter a number"));
           return employeeById();
         }
-        const id = response.employeeId;
-        const employeeById = await employees.findById(id);
-        return console.table(employeeById[0]);
+        const id = response.managerId;
+        const findByManager = await employees.findByManager(id);
+        return console.table(findByManager[0]);
       });
   }
 
@@ -133,27 +101,58 @@ async function initView(choice, dbConnection) {
       });
   }
 
-  async function employeesByManager() {
+  async function employeeById() {
     await inquirer
       .prompt({
         type: "input",
-        message: "Enter the manager id:",
-        name: "managerId",
+        message: "Enter the employee id:",
+        name: "employeeId",
       })
       .then(async (response) => {
-        if (isNaN(parseInt(response.managerId))) {
+        if (isNaN(parseInt(response.employeeId))) {
           console.info(chalk.red("Please enter a number"));
           return employeeById();
         }
-        const id = response.managerId;
-        const findByManager = await employees.findByManager(id);
-        return console.table(findByManager[0]);
+        const id = response.employeeId;
+        const employeeById = await employees.findById(id);
+        return console.table(employeeById[0]);
       });
   }
 
-  async function allUtilizedBudgets() {
-    const viewBudgets = await depts.utilizedBudgets();
-    return console.table(viewBudgets[0]);
+  async function roleById() {
+    await inquirer
+      .prompt({
+        type: "input",
+        message: "Enter the role id:",
+        name: "roleId",
+      })
+      .then(async (response) => {
+        if (isNaN(parseInt(response.roleId))) {
+          console.info(chalk.red("Please enter a number"));
+          return roleById();
+        }
+        const id = response.roleId;
+        const roleById = await roles.findById(id);
+        return console.table(roleById[0]);
+      });
+  }
+
+  async function deptById() {
+    await inquirer
+      .prompt({
+        type: "input",
+        message: "Enter the department id:",
+        name: "deptId",
+      })
+      .then(async (response) => {
+        if (isNaN(parseInt(response.deptId))) {
+          console.info(chalk.red("Please enter a number"));
+          return deptById();
+        }
+        const id = response.deptId;
+        const deptById = await depts.findById(id);
+        return console.table(deptById[0]);
+      });
   }
 
   async function budgetById() {

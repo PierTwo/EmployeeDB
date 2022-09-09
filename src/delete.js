@@ -24,23 +24,23 @@ async function initDelete(choice, dbConnection) {
       break;
   }
 
-  async function deleteDept() {
+  async function deleteEmployee() {
     await inquirer
       .prompt({
         type: "input",
-        message: "Enter the id of the department you want to delete:",
+        message: "Enter the id of the employee you want to delete:",
         name: "id",
       })
       .then((response) => {
         if (isNaN(parseInt(response.id))) {
-          console.info(chalk.red("Please enter a number for the department id"));
+          console.info(chalk.red("Please enter a number for the employee id"));
 
-          return deleteDept();
+          return deleteEmployee();
         }
 
-        depts.deleteById(response.id);
+        employees.deleteById(response.id);
 
-        return console.info(chalk.green(`Deleted the department with an id of ${response.id}`));
+        return console.info(chalk.green(`Deleted the employee with an id of ${response.id}`));
       });
   }
 
@@ -64,23 +64,23 @@ async function initDelete(choice, dbConnection) {
       });
   }
 
-  async function deleteEmployee() {
+  async function deleteDept() {
     await inquirer
       .prompt({
         type: "input",
-        message: "Enter the id of the employee you want to delete:",
+        message: "Enter the id of the department you want to delete:",
         name: "id",
       })
       .then((response) => {
         if (isNaN(parseInt(response.id))) {
-          console.info(chalk.red("Please enter a number for the employee id"));
+          console.info(chalk.red("Please enter a number for the department id"));
 
-          return deleteEmployee();
+          return deleteDept();
         }
 
-        employees.deleteById(response.id);
+        depts.deleteById(response.id);
 
-        return console.info(chalk.green(`Deleted the employee with an id of ${response.id}`));
+        return console.info(chalk.green(`Deleted the department with an id of ${response.id}`));
       });
   }
 }

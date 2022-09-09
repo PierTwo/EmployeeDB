@@ -24,66 +24,6 @@ async function initAdd(choice, dbConnection) {
       break;
   }
 
-  async function addDept() {
-    await inquirer
-      .prompt({
-        type: "input",
-        message: "Enter a name for the department:",
-        name: "deptName",
-      })
-      .then(async (response) => {
-        const dept = {
-          department_name: response.deptName,
-        };
-
-        depts.insert(dept);
-
-        return console.info(chalk.green(`Added department ${response.deptName}`));
-      });
-  }
-
-  async function addRole() {
-    await inquirer
-      .prompt([
-        {
-          type: "input",
-          message: "Enter a title for the role:",
-          name: "title",
-        },
-        {
-          type: "input",
-          message: "Enter a salary for the role:",
-          name: "salary",
-        },
-        {
-          type: "input",
-          message: "Enter the id of the department for this role:",
-          name: "deptId",
-        },
-      ])
-      .then(async (response) => {
-        if (isNaN(parseInt(response.roleSalary))) {
-          console.info(chalk.red("Please enter a number for the role salary"));
-
-          return addRole();
-        } else if (isNaN(parseInt(response.roleDeptId))) {
-          console.info(chalk.red("Please enter a number for the department id"));
-
-          return addRole();
-        } else {
-          const role = {
-            title: response.title,
-            salary: response.salary,
-            department_id: response.deptId,
-          };
-
-          roles.insert(role);
-
-          return console.info(chalk.green(`Added role with ${JSON.stringify(role)}`));
-        }
-      });
-  }
-
   async function addEmployee() {
     await inquirer
       .prompt([
@@ -131,6 +71,66 @@ async function initAdd(choice, dbConnection) {
 
           return console.info(chalk.green(`Added employee with ${JSON.stringify(employee)}`));
         }
+      });
+  }
+
+  async function addRole() {
+    await inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "Enter a title for the role:",
+          name: "title",
+        },
+        {
+          type: "input",
+          message: "Enter a salary for the role:",
+          name: "salary",
+        },
+        {
+          type: "input",
+          message: "Enter the id of the department for this role:",
+          name: "deptId",
+        },
+      ])
+      .then(async (response) => {
+        if (isNaN(parseInt(response.roleSalary))) {
+          console.info(chalk.red("Please enter a number for the role salary"));
+
+          return addRole();
+        } else if (isNaN(parseInt(response.roleDeptId))) {
+          console.info(chalk.red("Please enter a number for the department id"));
+
+          return addRole();
+        } else {
+          const role = {
+            title: response.title,
+            salary: response.salary,
+            department_id: response.deptId,
+          };
+
+          roles.insert(role);
+
+          return console.info(chalk.green(`Added role with ${JSON.stringify(role)}`));
+        }
+      });
+  }
+
+  async function addDept() {
+    await inquirer
+      .prompt({
+        type: "input",
+        message: "Enter a name for the department:",
+        name: "deptName",
+      })
+      .then(async (response) => {
+        const dept = {
+          department_name: response.deptName,
+        };
+
+        depts.insert(dept);
+
+        return console.info(chalk.green(`Added department ${response.deptName}`));
       });
   }
 }

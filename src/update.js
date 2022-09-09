@@ -27,116 +27,6 @@ async function initUpdate(choice, dbConnection) {
       break;
   }
 
-  async function updateDept() {
-    await inquirer
-      .prompt([
-        {
-          type: "input",
-          message: "Enter the id of the department to update:",
-          name: "deptId",
-        },
-        {
-          type: "input",
-          message: "Enter a new name for the department:",
-          name: "deptName",
-        },
-      ])
-      .then((response) => {
-        if (isNaN(parseInt(response.deptId))) {
-          console.info(chalk.red("Please enter a number for the id"));
-
-          return updateDept();
-        }
-        const dept = {
-          department_name: response.deptName,
-        };
-
-        depts.updateById(dept, response.deptId);
-
-        return console.info(
-          chalk.green(`Updated department ${response.deptId} with ${dept.department_name}`)
-        );
-      });
-  }
-
-  async function updateRole() {
-    await inquirer
-      .prompt([
-        {
-          type: "input",
-          message: "Enter the role id you want to update:",
-          name: "roleId",
-        },
-        {
-          type: "checkbox",
-          message: "What do you want to update?",
-          choices: ["title", "salary", "department id"],
-          name: "toUpdate",
-        },
-      ])
-      .then(async (response) => {
-        if (isNaN(parseInt(response.roleId))) {
-          console.info(chalk.red("Please enter a number for the role id"));
-
-          return updateRole();
-        }
-
-        const updatedRole = {};
-
-        if (response.toUpdate.includes("title")) {
-          await inquirer
-            .prompt({
-              type: "input",
-              message: "Enter the updated title name:",
-              name: "newTitle",
-            })
-            .then((response) => (updatedRole.title = response.newTitle));
-        }
-
-        if (response.toUpdate.includes("salary")) {
-          await inquirer
-            .prompt({
-              type: "input",
-              message: "Enter the new salary:",
-              name: "newSalary",
-            })
-            .then((response) => {
-              if (isNaN(parseInt(response.newSalary))) {
-                console.info(chalk.red("Please enter a number for the salary"));
-
-                return updateRole();
-              }
-
-              updatedRole.salary = response.newSalary;
-            });
-        }
-
-        if (response.toUpdate.includes("department id")) {
-          await inquirer
-            .prompt({
-              type: "input",
-              message: "Enter the updated department id:",
-              name: "newDeptId",
-            })
-            .then((response) => {
-              if (isNaN(parseInt(response.newDeptId))) {
-                console.info(chalk.red("Please enter a number for the department id"));
-
-                return updateRole();
-              }
-
-              updatedRole.department_id = response.newDeptId;
-            });
-        }
-
-        roles.updateById(updatedRole, response.roleId);
-
-        return console.info(
-          chalk.green(`Updated role ${response.roleId} with ${JSON.stringify(updatedRole)}`)
-        );
-      });
-  }
-
   async function updateEmployee() {
     await inquirer
       .prompt([
@@ -263,5 +153,116 @@ async function initUpdate(choice, dbConnection) {
         );
       });
   }
+
+  async function updateRole() {
+    await inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "Enter the role id you want to update:",
+          name: "roleId",
+        },
+        {
+          type: "checkbox",
+          message: "What do you want to update?",
+          choices: ["title", "salary", "department id"],
+          name: "toUpdate",
+        },
+      ])
+      .then(async (response) => {
+        if (isNaN(parseInt(response.roleId))) {
+          console.info(chalk.red("Please enter a number for the role id"));
+
+          return updateRole();
+        }
+
+        const updatedRole = {};
+
+        if (response.toUpdate.includes("title")) {
+          await inquirer
+            .prompt({
+              type: "input",
+              message: "Enter the updated title name:",
+              name: "newTitle",
+            })
+            .then((response) => (updatedRole.title = response.newTitle));
+        }
+
+        if (response.toUpdate.includes("salary")) {
+          await inquirer
+            .prompt({
+              type: "input",
+              message: "Enter the new salary:",
+              name: "newSalary",
+            })
+            .then((response) => {
+              if (isNaN(parseInt(response.newSalary))) {
+                console.info(chalk.red("Please enter a number for the salary"));
+
+                return updateRole();
+              }
+
+              updatedRole.salary = response.newSalary;
+            });
+        }
+
+        if (response.toUpdate.includes("department id")) {
+          await inquirer
+            .prompt({
+              type: "input",
+              message: "Enter the updated department id:",
+              name: "newDeptId",
+            })
+            .then((response) => {
+              if (isNaN(parseInt(response.newDeptId))) {
+                console.info(chalk.red("Please enter a number for the department id"));
+
+                return updateRole();
+              }
+
+              updatedRole.department_id = response.newDeptId;
+            });
+        }
+
+        roles.updateById(updatedRole, response.roleId);
+
+        return console.info(
+          chalk.green(`Updated role ${response.roleId} with ${JSON.stringify(updatedRole)}`)
+        );
+      });
+  }
+
+  async function updateDept() {
+    await inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "Enter the id of the department to update:",
+          name: "deptId",
+        },
+        {
+          type: "input",
+          message: "Enter a new name for the department:",
+          name: "deptName",
+        },
+      ])
+      .then((response) => {
+        if (isNaN(parseInt(response.deptId))) {
+          console.info(chalk.red("Please enter a number for the id"));
+
+          return updateDept();
+        }
+        const dept = {
+          department_name: response.deptName,
+        };
+
+        depts.updateById(dept, response.deptId);
+
+        return console.info(
+          chalk.green(`Updated department ${response.deptId} with ${dept.department_name}`)
+        );
+      });
+  }
 }
+
 module.exports = initUpdate;
