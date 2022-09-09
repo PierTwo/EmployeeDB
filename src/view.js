@@ -74,7 +74,7 @@ async function initView(choice, dbConnection) {
       })
       .then(async (response) => {
         if (isNaN(parseInt(response.managerId))) {
-          console.info(chalk.red("Please enter a number"));
+          console.info(chalk.red("Please enter a number for the manager id"));
           return employeeById();
         }
         const id = response.managerId;
@@ -92,7 +92,7 @@ async function initView(choice, dbConnection) {
       })
       .then(async (response) => {
         if (isNaN(parseInt(response.deptId))) {
-          console.info(chalk.red("Please enter a number"));
+          console.info(chalk.red("Please enter a number for the department id"));
           return employeeById();
         }
         const id = response.deptId;
@@ -110,7 +110,7 @@ async function initView(choice, dbConnection) {
       })
       .then(async (response) => {
         if (isNaN(parseInt(response.employeeId))) {
-          console.info(chalk.red("Please enter a number"));
+          console.info(chalk.red("Please enter a number for the employee id"));
           return employeeById();
         }
         const id = response.employeeId;
@@ -128,7 +128,7 @@ async function initView(choice, dbConnection) {
       })
       .then(async (response) => {
         if (isNaN(parseInt(response.roleId))) {
-          console.info(chalk.red("Please enter a number"));
+          console.info(chalk.red("Please enter a number for the role id"));
           return roleById();
         }
         const id = response.roleId;
@@ -146,7 +146,7 @@ async function initView(choice, dbConnection) {
       })
       .then(async (response) => {
         if (isNaN(parseInt(response.deptId))) {
-          console.info(chalk.red("Please enter a number"));
+          console.info(chalk.red("Please enter a number for the department id"));
           return deptById();
         }
         const id = response.deptId;
@@ -164,7 +164,7 @@ async function initView(choice, dbConnection) {
       })
       .then(async (response) => {
         if (isNaN(parseInt(response.deptId))) {
-          console.info(chalk.red("Please enter a number"));
+          console.info(chalk.red("Please enter a number for the department id"));
           return budgetById();
         }
         const id = response.deptId;

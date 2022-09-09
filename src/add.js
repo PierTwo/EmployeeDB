@@ -53,7 +53,7 @@ async function initAdd(choice, dbConnection) {
           console.info(chalk.red("Please enter a number for the role id"));
 
           return addEmployee();
-        } else if (response.managerId === true && isNaN(parseInt(response.roleDeptId))) {
+        } else if (response.managerId && isNaN(parseInt(response.managerId))) {
           console.info(
             chalk.red("Please enter a number for the manager id or nothing for no manager")
           );
