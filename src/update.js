@@ -107,7 +107,7 @@ async function initUpdate(choice, dbConnection) {
                 return updateEmployee();
               }
 
-              updatedEmployee.manager_id = response.newManagerId;
+              updatedEmployee.manager_id = response.newManagerId ? response.newManagerId : null;
             });
         }
 
@@ -127,22 +127,24 @@ async function initUpdate(choice, dbConnection) {
         },
         {
           type: "input",
-          message: "Enter the manager id:",
+          message: "Enter the manager id or nothing for no manager:",
           name: "managerId",
         },
       ])
       .then((response) => {
         if (isNaN(response.id)) {
-          console.info(chalk.red("Please enter a number for the id"));
+          console.info(chalk.red("Please enter a number for the employee id"));
 
           return updateManager();
-        } else if (isNaN(response.managerId)) {
-          console.info(chalk.red("Please enter a number for the manager id"));
+        } else if (response.managerId && isNaN(response.managerId)) {
+          console.info(
+            chalk.red("Please enter a number for the manager id or nothing for no manager")
+          );
 
           return updateManager();
         }
 
-        employees.updateManager(response.managerId, response.id);
+        employees.updateManager(response.managerId ? response.managerId : null, response.id);
 
         return console.table(chalk.yellow("=".repeat(6), "Updated manager", "=".repeat(6)));
       });
@@ -240,7 +242,7 @@ async function initUpdate(choice, dbConnection) {
       ])
       .then((response) => {
         if (isNaN(parseInt(response.deptId))) {
-          console.info(chalk.red("Please enter a number for the id"));
+          console.info(chalk.red("Please enter a number for the department id"));
 
           return updateDept();
         }
